@@ -1,0 +1,15 @@
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  transition: all 300ms ease-in-out;
+}
+#root {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  place-items: center;
+  flex-direction: column;
+}

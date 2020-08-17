@@ -1,5 +1,9 @@
 # Resources List
 
+## Make your personal resource list.
+
+## React, Firebase & ContextAPI
+
 ## Available Scripts
 
 In the project directory, you can run:
