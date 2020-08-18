@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import { auth, provider } from '../firebase';
 
@@ -37,29 +37,39 @@ function Login() {
   const classes = useStyles();
   // eslint-disable-next-line no-unused-vars
   const [state, dispatch] = useStateValue();
-
+  const [loading, setLoading] = useState(true);
   const signIn = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user)
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        dispatch({
+          type: actionTypes.SET_USER,
+          user: result.user,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setLoading(false);
       dispatch({
         type: actionTypes.SET_USER,
         user: user,
       });
-    else
-      auth
-        .signInWithPopup(provider)
-        .then((result) => {
-          localStorage.setItem('user', JSON.stringify(result.user));
-          dispatch({
-            type: actionTypes.SET_USER,
-            user: result.user,
-          });
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-  };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  if (loading) {
+    return (
+      <div className={classes.login}>
+        <div className="loader">Loading...</div>
+      </div>
+    );
+  }
   return (
     <div className={classes.login}>
       <div>

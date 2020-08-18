@@ -4,9 +4,12 @@ import Categories from './components/Categories';
 import Items from './components/Items';
 import AddItem from './components/AddItem';
 import Login from './components/Login';
+import Logout from './components/Logout';
 
 import db from './firebase';
 import { useStateValue } from './context/StateProvider';
+import { actionTypes } from './context/reducer';
+import { auth } from 'firebase';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -15,6 +18,14 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [items, setItems] = useState([]);
   const [catId, setCatId] = useState('');
+
+  const logout = () => {
+    auth().signOut();
+    dispatch({
+      type: actionTypes.SET_USER,
+      user: '',
+    });
+  };
 
   const catChanged = (e) => {
     const {
@@ -49,6 +60,7 @@ function App() {
       {user ? (
         <>
           <UserInfo />
+          <Logout logout={logout} />
           <Categories values={categories} change={catChanged} />
           <Items data={items} />
           <AddItem id={catId} />
