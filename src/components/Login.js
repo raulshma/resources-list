@@ -48,17 +48,18 @@ function Login() {
         });
       })
       .catch((error) => {
-        console.error(error);
+        alert(error.message);
       });
   };
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    const sub = auth.onAuthStateChanged((user) => {
       setLoading(false);
       dispatch({
         type: actionTypes.SET_USER,
         user: user,
       });
+      sub();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -44,16 +44,15 @@ function App() {
   };
 
   useEffect(() => {
-    if (user)
-      db.collection('categories').onSnapshot(({ docs }) => {
-        setCategories(
-          docs.map((doc) => ({
-            id: doc.id,
-            name: doc.data().name,
-          }))
-        );
-      });
-  }, [user]);
+    db.collection('categories').onSnapshot(({ docs }) => {
+      setCategories(
+        docs.map((doc) => ({
+          id: doc.id,
+          name: doc.data().name,
+        }))
+      );
+    });
+  }, []);
 
   return (
     <React.Fragment>
