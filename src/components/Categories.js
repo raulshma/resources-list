@@ -1,25 +1,34 @@
-import React from 'react';
-import { createUseStyles } from 'react-jss';
-
-const useStyles = createUseStyles({
-  select: {
-    position: 'fixed',
-    top: '0.7rem',
-    left: '60px',
-  },
-});
+import React, { useEffect } from 'react';
 
 function Categories({ values, change }) {
-  const classes = useStyles();
+  useEffect(() => {
+    console.log(values);
+    if (values.length > 0) {
+      const target = { target: { value: values[0].id } };
+      change(target);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values]);
   return (
-    <select name="categories" className={classes.select} onChange={change}>
-      <option value="">Select Category</option>
-      {values.map((e) => (
-        <option value={e.id} key={e.id}>
-          {e.name}
-        </option>
-      ))}
-    </select>
+    <>
+      {values.length > 0 ? (
+        <select
+          name="categories"
+          className="input select"
+          onChange={change}
+          defaultValue={values[0].id}
+        >
+          <option value="">Category</option>
+          {values.map((e) => (
+            <option value={e.id} key={e.id}>
+              {e.name}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }
 

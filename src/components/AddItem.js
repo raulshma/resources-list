@@ -21,6 +21,7 @@ const useStyles = createUseStyles({
   '@media screen and (max-width: 32em)': {
     myForm: {
       width: '85vw',
+      gridTemplateColumns: '1fr',
     },
     myFormControls: {
       flexDirection: 'column',
@@ -55,7 +56,7 @@ function AddItem({ id }) {
           rows="4"
           type="text"
           name="title"
-          placeholder="Name"
+          placeholder="Name and/or description"
           onChange={handleChange}
           value={form.title}
           required
@@ -69,7 +70,7 @@ function AddItem({ id }) {
           value={form.link}
           required
         />
-        <input className={classes.button} type="submit" value="ADD" />
+        <input className="input button" type="submit" value="ADD" />
       </div>
     </form>
   );

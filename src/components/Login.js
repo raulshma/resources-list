@@ -19,7 +19,7 @@ const useStyles = createUseStyles({
       '& h1': {
         textAlign: 'center',
         paddingBottom: '2rem',
-        color: '#60435F',
+        color: 'rgba(255,255,255,0.87)',
       },
       '& button': {
         width: '300px',
@@ -75,7 +75,12 @@ function Login() {
     <div className={classes.login}>
       <div>
         <h1>No registration required, sign in with your google account</h1>
-        <button type="button" name="signIn" onClick={signIn}>
+        <button
+          type="button"
+          className="input button"
+          name="signIn"
+          onClick={signIn}
+        >
           Sign In
         </button>
       </div>

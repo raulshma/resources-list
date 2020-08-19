@@ -6,11 +6,12 @@ const useStyles = createUseStyles({
   user: {
     position: 'fixed',
     top: '5px',
-    left: '5px',
-    border: '1px solid #0062b9',
+    left: '50%',
+    border: '3px solid #ffffff8e',
     width: 50,
     height: 50,
     borderRadius: '50%',
+    transform: 'translateX(-50%)',
   },
 });
 

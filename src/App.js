@@ -6,10 +6,9 @@ import AddItem from './components/AddItem';
 import Login from './components/Login';
 import Logout from './components/Logout';
 
-import db from './firebase';
+import db, { auth } from './firebase';
 import { useStateValue } from './context/StateProvider';
 import { actionTypes } from './context/reducer';
-import { auth } from 'firebase';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -44,23 +43,24 @@ function App() {
   };
 
   useEffect(() => {
-    db.collection('categories').onSnapshot(({ docs }) => {
-      setCategories(
-        docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().name,
-        }))
-      );
-    });
-  }, []);
+    if (user)
+      db.collection('categories').onSnapshot(({ docs }) => {
+        setCategories(
+          docs.map((doc, i) => ({
+            id: doc.id,
+            name: doc.data().name,
+          }))
+        );
+      });
+  }, [user]);
 
   return (
     <React.Fragment>
       {user ? (
         <>
+          <Categories values={categories} change={catChanged} />
           <UserInfo />
           <Logout logout={logout} />
-          <Categories values={categories} change={catChanged} />
           <Items data={items} />
           <AddItem id={catId} />
         </>

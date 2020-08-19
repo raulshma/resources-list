@@ -5,7 +5,7 @@ import { createUseStyles } from 'react-jss';
 const useStyles = createUseStyles({
   container: {
     width: '60vw',
-    marginTop: '60px',
+    marginTop: '4rem',
     marginBottom: '1rem',
     padding: '1rem',
     display: 'flex',
