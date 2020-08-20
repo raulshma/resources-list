@@ -19,7 +19,7 @@ function App() {
   const [catId, setCatId] = useState('');
 
   const logout = () => {
-    auth().signOut();
+    auth.signOut();
     dispatch({
       type: actionTypes.SET_USER,
       user: '',
@@ -35,6 +35,7 @@ function App() {
       db.collection('categories')
         .doc(id)
         .collection('items')
+        .where('userId', '==', user.uid)
         .orderBy('timestamp', 'asc')
         .onSnapshot((snapshot) =>
           setItems(snapshot.docs.map((doc) => doc.data()))

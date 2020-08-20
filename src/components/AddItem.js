@@ -1,6 +1,7 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 import { firestore } from 'firebase';
+import { useStateValue } from '../context/StateProvider';
 import db from '../firebase';
 
 const useStyles = createUseStyles({
@@ -31,6 +32,7 @@ const useStyles = createUseStyles({
 
 function AddItem({ id }) {
   const classes = useStyles();
+  const [{ user }] = useStateValue();
   const [form, setForm] = React.useState({ title: '', link: '' });
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -45,6 +47,7 @@ function AddItem({ id }) {
         title: form.title,
         link: form.link,
         timestamp: firestore.FieldValue.serverTimestamp(),
+        userId: user.uid,
       });
     }
   };
