@@ -26,7 +26,12 @@ function Categories({ values, change }) {
           ))}
         </select>
       ) : (
-        <></>
+        <>
+          <select className="input select">
+            <option value="">Category</option>
+            <option value="">Loading...</option>
+          </select>
+        </>
       )}
     </>
   );

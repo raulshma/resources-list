@@ -5,7 +5,7 @@ import { createUseStyles } from 'react-jss';
 const useStyles = createUseStyles({
   container: {
     width: '60vw',
-    marginTop: '4rem',
+    marginTop: '4.5rem',
     marginBottom: '1rem',
     padding: '1rem',
     display: 'flex',
@@ -18,15 +18,20 @@ const useStyles = createUseStyles({
   },
 });
 
-function Items({ data }) {
+function Items({ isLoading, data }) {
   const classes = useStyles();
-
   return (
-    <div className={classes.container}>
-      {data.map((e) => (
-        <Item item={e} key={e.title} />
-      ))}
-    </div>
+    <>
+      {!isLoading ? (
+        <div className={classes.container}>
+          {data.map((e) => (
+            <Item item={e} key={e.title} />
+          ))}
+        </div>
+      ) : (
+        <div className="loader loader-sm">Loading...</div>
+      )}
+    </>
   );
 }
 

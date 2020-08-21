@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+
 import UserInfo from './components/UserInfo';
 import Categories from './components/Categories';
 import Items from './components/Items';
@@ -13,7 +15,11 @@ import { actionTypes } from './context/reducer';
 function App() {
   // eslint-disable-next-line no-unused-vars
   const [{ user }, dispatch] = useStateValue();
+  const [headerStyle, setHeaderStyle] = useState({
+    backgroundColor: 'transparent',
+  });
 
+  const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [items, setItems] = useState([]);
   const [catId, setCatId] = useState('');
@@ -41,7 +47,27 @@ function App() {
           setItems(snapshot.docs.map((doc) => doc.data()))
         );
     }
+    setIsLoading(false);
   };
+
+  useScrollPosition(
+    ({ prevPos, currPos }) => {
+      console.log(currPos.y < -100, currPos.y);
+      if (currPos.y < -100) {
+        setHeaderStyle({
+          backgroundColor: 'rgba(255,255,255,0.87)',
+          boxShadow: '0px 4px 3px 0px rgba(0, 0, 0, 0.1)',
+        });
+        return;
+      }
+      if (currPos.y > -100) {
+        if (headerStyle.backgroundColor !== 'transparent') {
+          setHeaderStyle({ backgroundColor: 'transparent' });
+        }
+      }
+    },
+    [headerStyle]
+  );
 
   useEffect(() => {
     if (user)
@@ -59,10 +85,12 @@ function App() {
     <React.Fragment>
       {user ? (
         <>
-          <Categories values={categories} change={catChanged} />
-          <UserInfo />
-          <Logout logout={logout} />
-          <Items data={items} />
+          <div className="header" style={{ ...headerStyle }}>
+            <Categories values={categories} change={catChanged} />
+            <UserInfo />
+            <Logout logout={logout} />
+          </div>
+          <Items isLoading={isLoading} data={items} />
           <AddItem id={catId} />
         </>
       ) : (

@@ -15,16 +15,15 @@
   border-radius: 0;
 }
 l,
-body {
+body,
+html {
   width: 100vw;
   height: 100vh;
   margin: 0;
   padding: 0;
-  transition: all 300ms ease-in-out;
   background: #4776e6;
   background: linear-gradient(to right, #8e54e9, #4776e6);
   background-attachment: fixed;
-  overflow-x: hidden;
 }
 #root {
   width: inherit;
@@ -33,7 +32,16 @@ body {
   place-items: center;
   flex-direction: column;
 }
-
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  transition: background-color 350ms ease-in-out, box-shadow 350ms ease-in-out;
+}
 .card {
   background: #fdfbfb;
   border-radius: 8px;
@@ -42,6 +50,9 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: 0px 14px 15px rgba(34, 35, 58, 0.4);
+}
+.card a {
+  word-wrap: break-word;
 }
 .card h1 {
   margin-bottom: 0;
@@ -77,19 +88,20 @@ body {
   display: inline-flex;
   justify-content: center;
 }
-
-.select {
-  position: fixed;
-  top: 0.4rem;
-  left: 4px;
-  padding: 8px 15px 10px 15px;
+.user-profile {
+  border: 3px solid #ffffff8e;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
+.select {
+  margin-left: 6px;
+  margin-right: 0px;
+}
+.select,
 .logout {
-  position: fixed;
-  top: 0.4rem;
-  right: 0;
-  padding: 8px 15px 10px 15px;
+  margin-top: 0.4rem;
 }
 
 .input:hover {
@@ -117,6 +129,14 @@ body {
   -webkit-animation: load8 1.1s infinite linear;
   animation: load8 1.1s infinite linear;
 }
+
+.loader-sm {
+  margin: 20px auto;
+  margin-top: 5.5rem;
+  width: 25px;
+  height: 25px;
+}
+
 @-webkit-keyframes load8 {
   0% {
     -webkit-transform: rotate(0deg);
