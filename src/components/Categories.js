@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 function Categories({ values, change }) {
   useEffect(() => {
-    console.log(values);
     if (values.length > 0) {
       const target = { target: { value: values[0].id } };
       change(target);

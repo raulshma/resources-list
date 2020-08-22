@@ -18,14 +18,14 @@ const useStyles = createUseStyles({
   },
 });
 
-function Items({ isLoading, data }) {
+function Items({ isLoading, categoryId, data }) {
   const classes = useStyles();
   return (
     <>
       {!isLoading ? (
         <div className={classes.container}>
           {data.map((e) => (
-            <Item item={e} key={e.title} />
+            <Item categoryId={categoryId} item={e} key={e.title} />
           ))}
         </div>
       ) : (

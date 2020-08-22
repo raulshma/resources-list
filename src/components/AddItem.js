@@ -37,18 +37,19 @@ function AddItem({ id }) {
   const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     if (!form.title || !form.link) {
       return;
     }
     if (id) {
-      db.collection('categories').doc(id).collection('items').add({
+      await db.collection('categories').doc(id).collection('items').add({
         title: form.title,
         link: form.link,
         timestamp: firestore.FieldValue.serverTimestamp(),
         userId: user.uid,
       });
+      setForm({ title: '', link: '' });
     }
   };
   return (

@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
-
-import UserInfo from './components/UserInfo';
+import React, { useEffect, useState } from 'react';
+import AddItem from './components/AddItem';
 import Categories from './components/Categories';
 import Items from './components/Items';
-import AddItem from './components/AddItem';
 import Login from './components/Login';
 import Logout from './components/Logout';
-
-import db, { auth } from './firebase';
-import { useStateValue } from './context/StateProvider';
+import UserInfo from './components/UserInfo';
 import { actionTypes } from './context/reducer';
+import { useStateValue } from './context/StateProvider';
+import db, { auth } from './firebase';
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -44,7 +42,13 @@ function App() {
         .where('userId', '==', user.uid)
         .orderBy('timestamp', 'asc')
         .onSnapshot((snapshot) =>
-          setItems(snapshot.docs.map((doc) => doc.data()))
+          setItems(
+            snapshot.docs.map((doc) => {
+              const data = doc.data();
+              const id = doc.id;
+              return { ...data, id };
+            })
+          )
         );
     }
     setIsLoading(false);
@@ -52,7 +56,6 @@ function App() {
 
   useScrollPosition(
     ({ prevPos, currPos }) => {
-      console.log(currPos.y < -100, currPos.y);
       if (currPos.y < -100) {
         setHeaderStyle({
           backgroundColor: 'rgba(255,255,255,0.87)',
@@ -90,7 +93,7 @@ function App() {
             <UserInfo />
             <Logout logout={logout} />
           </div>
-          <Items isLoading={isLoading} data={items} />
+          <Items categoryId={catId} isLoading={isLoading} data={items} />
           <AddItem id={catId} />
         </>
       ) : (

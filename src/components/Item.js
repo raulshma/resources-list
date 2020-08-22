@@ -1,6 +1,18 @@
 import React from 'react';
+import db from '../firebase';
 
-function Item({ item }) {
+function Item({ categoryId, item }) {
+  const deleteItem = async (itemId) => {
+    if (itemId) {
+      await db
+        .collection('categories')
+        .doc(categoryId)
+        .collection('items')
+        .doc(itemId)
+        .delete();
+    }
+  };
+
   return (
     <div className="card">
       <h1>
@@ -9,9 +21,19 @@ function Item({ item }) {
         </a>
       </h1>
       <blockquote>{item.title}</blockquote>
-      {item.timestamp && (
-        <small>{new Date(item.timestamp.toDate()).toUTCString()}</small>
-      )}
+      <div className="item__footer">
+        {item.timestamp && (
+          <small>{new Date(item.timestamp.toDate()).toUTCString()}</small>
+        )}
+        <button
+          onClick={() => {
+            if (window.confirm('Are you sure you wish to delete this item?'))
+              deleteItem(item.id);
+          }}
+        >
+          Remove
+        </button>
+      </div>
     </div>
   );
 }
