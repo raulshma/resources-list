@@ -22,6 +22,7 @@ html {
   margin: 0;
   padding: 0;
   background: #4776e6;
+  font-size: 16px;
   background: linear-gradient(to right, #8e54e9, #4776e6);
   background-attachment: fixed;
 }
@@ -204,5 +205,15 @@ html {
   }
   100% {
     opacity: 1;
+  }
+}
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+  }
+}
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 22px;
   }
 }
