@@ -6,6 +6,7 @@ import db from '../firebase';
 
 const useStyles = createUseStyles({
   myForm: {
+    marginTop: '4.5rem',
     width: '100%',
     display: 'grid',
     gridTemplateColumns: '0.6fr',
@@ -15,6 +16,7 @@ const useStyles = createUseStyles({
   myFormControls: {
     display: 'grid',
     gridTemplateColumns: '1fr',
+    gap: '0.3rem',
   },
   button: {
     marginRight: 0,

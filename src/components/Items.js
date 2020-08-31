@@ -5,7 +5,7 @@ import { createUseStyles } from 'react-jss';
 const useStyles = createUseStyles({
   container: {
     width: '60vw',
-    marginTop: '4.5rem',
+    marginTop: '1rem',
     marginBottom: '1rem',
     padding: '1rem',
     display: 'flex',
@@ -20,12 +20,13 @@ const useStyles = createUseStyles({
 
 function Items({ isLoading, categoryId, data }) {
   const classes = useStyles();
+
   return (
     <>
       {!isLoading ? (
         <div className={classes.container}>
-          {data.map((e) => (
-            <Item categoryId={categoryId} item={e} key={e.title} />
+          {data.map((e, i) => (
+            <Item categoryId={categoryId} item={e} key={e.title} index={i} />
           ))}
         </div>
       ) : (

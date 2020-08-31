@@ -1,7 +1,7 @@
 import React from 'react';
 import db from '../firebase';
 
-function Item({ categoryId, item }) {
+function Item({ categoryId, item, index }) {
   const deleteItem = async (itemId) => {
     if (itemId) {
       await db
@@ -16,6 +16,7 @@ function Item({ categoryId, item }) {
   return (
     <div className="card">
       <h1>
+        <span className="card__sno">{index + 1}.</span>
         <a href={item.link} target="_blank" rel="noopener noreferrer">
           {item.link}
         </a>
@@ -23,7 +24,7 @@ function Item({ categoryId, item }) {
       <blockquote>{item.title}</blockquote>
       <div className="item__footer">
         {item.timestamp && (
-          <small>{new Date(item.timestamp.toDate()).toUTCString()}</small>
+          <small>{new Date(item.timestamp.toDate()).toLocaleString()}</small>
         )}
         <button
           onClick={() => {
