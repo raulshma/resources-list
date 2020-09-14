@@ -49,23 +49,22 @@ html {
 .card {
   position: relative;
   background: #fdfbfb;
-  border-radius: 8px;
   margin-bottom: 1rem;
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 14px 15px rgba(34, 35, 58, 0.4);
+  box-shadow: 0px 1px 1px rgba(34, 35, 58, 0.4);
 }
 
 .card:hover .item__edit {
-  animation: show-edit 500ms ease-in-out;
-  animation-fill-mode: forwards;
+  /* animation: show-edit 500ms ease-in-out;
+  animation-fill-mode: forwards; */
 }
 
 .card .card__sno {
   font-weight: 800;
   padding-right: 0.5rem;
-  color: #4776e6
+  color: #4776e6;
 }
 
 .card a {
@@ -184,6 +183,23 @@ html {
   margin-top: 5.5rem;
   width: 25px;
   height: 25px;
+}
+
+button,
+input[type='button'],
+input[type='submit'] {
+  padding-right: 0;
+  padding-left: 0;
+}
+.mt0 {
+  margin-top: 0 !important;
+}
+
+.color__loader {
+  border-top: 1.1em solid #da22ff;
+  border-right: 1.1em solid #da22ff;
+  border-bottom: 1.1em solid #da22ff;
+  border-left: 1.1em solid white;
 }
 
 @-webkit-keyframes load8 {

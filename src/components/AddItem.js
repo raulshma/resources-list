@@ -1,6 +1,6 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import { firestore } from 'firebase';
+import firebase from 'firebase/app';
 import { useStateValue } from '../context/StateProvider';
 import db from '../firebase';
 
@@ -48,7 +48,7 @@ function AddItem({ id }) {
       await db.collection('categories').doc(id).collection('items').add({
         title: form.title,
         link: form.link,
-        timestamp: firestore.FieldValue.serverTimestamp(),
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         userId: user.uid,
       });
       setForm({ title: '', link: '' });

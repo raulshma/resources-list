@@ -1,7 +1,7 @@
 import React from 'react';
 import db from '../firebase';
 
-function Item({ categoryId, item, index }) {
+function Item({ data: item, categoryId }) {
   const deleteItem = async (itemId) => {
     if (itemId) {
       await db
@@ -16,7 +16,7 @@ function Item({ categoryId, item, index }) {
   return (
     <div className="card">
       <h1>
-        <span className="card__sno">{index + 1}.</span>
+        {/* <span className="card__sno">{index + 1}.</span> */}
         <a href={item.link} target="_blank" rel="noopener noreferrer">
           {item.link}
         </a>
