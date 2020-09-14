@@ -202,6 +202,11 @@ input[type='submit'] {
   border-left: 1.1em solid white;
 }
 
+.rdt_Table button,
+.rdt_Pagination select {
+  padding: 0;
+}
+
 @-webkit-keyframes load8 {
   0% {
     -webkit-transform: rotate(0deg);

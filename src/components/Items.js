@@ -174,7 +174,6 @@ function Items({ isLoading, categoryId, data }) {
           subHeader
           subHeaderComponent={subHeaderComponentMemo}
           dense={true}
-          paginationPerPage={7}
           progressPending={isLoading}
           progressComponent={<ProgressComponent />}
           expandableRowsComponent={<Item categoryId={categoryId} />}
