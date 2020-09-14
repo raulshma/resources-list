@@ -6,6 +6,8 @@ React, Firebase & ContextAPI
 
 [Demo](https://raulshma.github.io/resources-list)
 
+![Build and Deploy](https://github.com/raulshma/resources-list/workflows/Build%20and%20Deploy/badge.svg?event=deployment_status)
+
 ## Available Scripts
 
 In the project directory, you can run:
